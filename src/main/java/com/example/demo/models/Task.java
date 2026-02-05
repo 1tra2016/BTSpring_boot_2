@@ -8,8 +8,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Task {
+
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -22,22 +23,23 @@ public class Task {
     @Column(nullable = false)
     private Priority priority;
 
+    @Column(name = "assigned_user_id")
+    private Long assignedUserId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "assigned_to")
-    private User assignedTo;
-
-    public Task(long id, String title, String description, Priority priority, User assignedTo){
+    public Task(Long id, String title, String description, Priority priority, Long assignedUserId) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.priority = priority;
-        this.assignedTo = assignedTo;
+        this.assignedUserId = assignedUserId;
     }
-    public Task(String title, String description, Priority priority, User assignedTo) {
+
+    public Task(String title, String description, Priority priority, Long assignedUserId) {
         this.title = title;
         this.description = description;
         this.priority = priority;
-        this.assignedTo = assignedTo;
+        this.assignedUserId = assignedUserId;
     }
+
+    public Task() {}
 }

@@ -3,13 +3,12 @@ package com.example.demo.controllers;
 import com.example.demo.models.Task;
 import com.example.demo.repositories.TaskRepository;
 import com.example.demo.services.TaskService;
+import com.example.demo.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,5 +32,19 @@ public class TaskController {
                     .toList();
         }
         return ResponseEntity.ok(tasks);
+    }
+
+    @PostMapping
+    public ResponseEntity<Task> createTask(@RequestBody Task newTask) {
+        Task createdTask = taskService.addTask(newTask);
+
+        if (createdTask == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        else{
+            return ResponseEntity.status(HttpStatus.CREATED)
+                .body(createdTask);
+        }
+
     }
 }

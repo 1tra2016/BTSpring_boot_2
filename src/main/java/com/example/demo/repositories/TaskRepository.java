@@ -32,8 +32,30 @@ public class TaskRepository {
     public List<Task> findAll() {
         return tasks;
     }
-    public void save(Task task){
+    public void addTask(Task task){
         task.setId(currentId++);
         tasks.add(task);
+    }
+    public Task save(long id, Task updatedTask) {
+        Task existingTask = findById(id);
+
+        if (existingTask == null) {
+            return null;
+        }
+
+        existingTask.setTitle(updatedTask.getTitle());
+        existingTask.setDescription(updatedTask.getDescription());
+        existingTask.setPriority(updatedTask.getPriority());
+        existingTask.setAssignedUserId(updatedTask.getAssignedUserId());
+
+        return existingTask;
+    }
+
+    public Task findById(Long id){
+        return tasks.stream().filter(task1 -> task1.getId().equals(id)).findFirst().orElse(null);
+    }
+
+    public boolean deleteById(Long id){
+        return tasks.removeIf(task -> task.getId().equals(id));
     }
 }

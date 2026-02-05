@@ -38,7 +38,17 @@ public class TaskService {
             return null;
         }
 
-        taskRepository.save(newTask);
+        taskRepository.addTask(newTask);
         return newTask;
+    }
+
+    public Task  updateTask(Long id, Task newTask) {
+        return taskRepository.save(id, newTask);
+    }
+
+    public boolean deleteById(Long id){
+        Task task = taskRepository.findById(id);
+        if (task == null) return false;
+        return taskRepository.deleteById(id);
     }
 }

@@ -11,9 +11,9 @@ public class UserRepository {
     private final List<User> users = new ArrayList<>();
 
     public UserRepository() {
-        users.add(new User(1L, "A", "a@gmail.com", "ADMIN"));
-        users.add(new User(2L, "B", "b@gmail.com", "USER"));
-        users.add(new User(3L, "C", "c@gmail.com", "USER"));
+        users.add(new User(1L, "abc", "a@gmail.com", "ADMIN"));
+        users.add(new User(2L, "bcd", "b@gmail.com", "USER"));
+        users.add(new User(3L, "cde", "c@gmail.com", "USER"));
     }
 
     public List<User> findAll() {

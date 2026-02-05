@@ -36,19 +36,19 @@ public class TaskRepository {
         task.setId(currentId++);
         tasks.add(task);
     }
-    public Task save(long id, Task updatedTask) {
-        Task existingTask = findById(id);
+    public Task save(long id, Task newTask) {
+        Task oldTask = findById(id);
 
-        if (existingTask == null) {
+        if (oldTask == null) {
             return null;
         }
 
-        existingTask.setTitle(updatedTask.getTitle());
-        existingTask.setDescription(updatedTask.getDescription());
-        existingTask.setPriority(updatedTask.getPriority());
-        existingTask.setAssignedUserId(updatedTask.getAssignedUserId());
+        oldTask.setTitle(newTask.getTitle());
+        oldTask.setDescription(newTask.getDescription());
+        oldTask.setPriority(newTask.getPriority());
+        oldTask.setAssignedUserId(newTask.getAssignedUserId());
 
-        return existingTask;
+        return oldTask;
     }
 
     public Task findById(Long id){

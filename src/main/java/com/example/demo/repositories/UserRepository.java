@@ -25,4 +25,26 @@ public class UserRepository {
                 .findFirst()
                 .orElse(null);
     }
+
+    public User save(User user){
+        if (users.stream().filter(u->u.getId()==user.getId()).findFirst() != null) {
+            return null;
+        }
+        users.add(user);
+        return user;
+    }
+    public User save(Long id, User newUser){
+        User oldUser = findById(id);
+        if (oldUser==null) {
+            return null;
+        }
+        oldUser.setUsername(newUser.getUsername());
+        oldUser.setEmail(newUser.getEmail());
+        oldUser.setRole(newUser.getRole());
+        return oldUser;
+    }
+    public boolean delete(Long id){
+        User user = findById(id);
+        return users.removeIf(u->u.getId()==id);
+    }
 }

@@ -25,5 +25,11 @@ public class UserService {
     public User findUserById(Long id){
         return userRepository.findById(id);
     }
+    public User updateUser(Long id, User newUser) {
+        return userRepository.save(id,newUser);
+    }
+    public boolean deleteUser(Long id){
+        return userRepository.delete(id);
+    }
 }
 
